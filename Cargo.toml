@@ -1,0 +1,8 @@
+[package]
+name = "simple_stats"
+version = "0.0.1"
+authors = ["Jeff Belgum <jeffbelgum@gmail.com>"]
+
+[dependencies]
+rand = "0.3.7"
+num = "0.1.23"
