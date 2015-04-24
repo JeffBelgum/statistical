@@ -44,10 +44,10 @@ fn sum_square_deviations<T>(v: &[T], c: Option<T>) -> T
     sum
 }
 
-pub fn sample_variance<T>(v: &[T], xbar: Option<T>) -> T
+pub fn variance<T>(v: &[T], xbar: Option<T>) -> T
     where T: Copy + FromPrimitive + Num + NumCast + PartialOrd
 {
-    assert!(v.len() > 1, "sample variance requires at least two data points");
+    assert!(v.len() > 1, "variance requires at least two data points");
     let len: T = FromPrimitive::from_usize(v.len()).unwrap();
     let sum = sum_square_deviations(v, xbar);
     sum / (len - One::one())
@@ -62,11 +62,11 @@ pub fn population_variance<T>(v: &[T], mu: Option<T>) -> T
     sum / len
 }
 
-pub fn sample_standard_deviation<T>(v: &[T], xbar: Option<T>) -> T
+pub fn standard_deviation<T>(v: &[T], xbar: Option<T>) -> T
     where T: Float + FromPrimitive
 {
-    let svar = sample_variance(v, xbar);
-    svar.sqrt()
+    let var = variance(v, xbar);
+    var.sqrt()
 }
 
 pub fn population_standard_deviation<T>(v: &[T], mu: Option<T>) -> T
@@ -191,12 +191,12 @@ mod tests {
     }
 
     #[test]
-    fn test_sample_variance() {
+    fn test_variance() {
         let v = vec![0.0, 0.25, 0.25, 1.25, 1.5, 1.75, 2.75, 3.25];
         // result is within `epsilon` of expected value
         let expected = 1.428571;
         let epsilon = 1e-6;
-        assert!((expected - sample_variance(&v, None)).abs() < epsilon);
+        assert!((expected - variance(&v, None)).abs() < epsilon);
     }
 
     #[test]
@@ -209,12 +209,12 @@ mod tests {
     }
 
     #[test]
-    fn test_sample_standard_deviation() {
+    fn test_standard_deviation() {
         let v = vec![0.0, 0.25, 0.25, 1.25, 1.5, 1.75, 2.75, 3.25];
         // result is within `epsilon` of expected value
         let expected = 1.195229;
         let epsilon = 1e-6;
-        assert!((expected - sample_standard_deviation(&v, None)).abs() < epsilon);
+        assert!((expected - standard_deviation(&v, None)).abs() < epsilon);
     }
 
     #[test]
