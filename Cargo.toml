@@ -1,7 +1,10 @@
 [package]
 name = "simple_stats"
+description = "A simple statistics library"
 version = "0.0.1"
 authors = ["Jeff Belgum <jeffbelgum@gmail.com>"]
+
+license = "MIT"
 
 [dependencies]
 rand = "0.3.7"
