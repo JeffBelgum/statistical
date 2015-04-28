@@ -1,3 +1,24 @@
+// Copyright (c) 2015 Jeff Belgum
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without
+// limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+// the Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+// conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
+// of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+// SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+// DEALINGS IN THE SOFTWARE.
+
+//! A simple statistics library
+//!
+//! Heavily inspired by the python standard library statistics module.
+
 extern crate rand;
 extern crate num;
 
@@ -8,6 +29,8 @@ use num::{FromPrimitive,
           One,
           Zero};
 
+/// The mean is the sum of a collection of numbers divided by the number of numbers in the collection.
+/// (reference)[http://en.wikipedia.org/wiki/Arithmetic_mean]
 pub fn mean<T>(v: &[T]) -> T
     where T: Copy + FromPrimitive + Num + NumCast
 {
@@ -15,6 +38,8 @@ pub fn mean<T>(v: &[T]) -> T
     v.iter().fold(Zero::zero(), |acc: T, elem| acc + *elem) / len
 }
 
+/// The median is the number separating the higher half of a data sample, a population, or
+/// a probability distribution, from the lower half (reference)[http://en.wikipedia.org/wiki/Median)
 pub fn median<T>(v: &[T]) -> T
     where T: Copy + FromPrimitive + Num + NumCast + PartialOrd
 {
@@ -44,6 +69,7 @@ fn sum_square_deviations<T>(v: &[T], c: Option<T>) -> T
     sum
 }
 
+/// (Sample variance)[http://en.wikipedia.org/wiki/Variance#Sample_variance]
 pub fn variance<T>(v: &[T], xbar: Option<T>) -> T
     where T: Copy + FromPrimitive + Num + NumCast + PartialOrd
 {
@@ -53,6 +79,7 @@ pub fn variance<T>(v: &[T], xbar: Option<T>) -> T
     sum / (len - One::one())
 }
 
+/// (Population variance)[http://en.wikipedia.org/wiki/Variance#Population_variance]
 pub fn population_variance<T>(v: &[T], mu: Option<T>) -> T
     where T: Copy + FromPrimitive + Num + NumCast + PartialOrd
 {
@@ -62,6 +89,8 @@ pub fn population_variance<T>(v: &[T], mu: Option<T>) -> T
     sum / len
 }
 
+///  Standard deviation is a measure that is used to quantify the amount of variation or
+///  dispersion of a set of data values. (reference)[http://en.wikipedia.org/wiki/Standard_deviation]
 pub fn standard_deviation<T>(v: &[T], xbar: Option<T>) -> T
     where T: Float + FromPrimitive
 {
