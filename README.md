@@ -4,9 +4,20 @@ Simple Stats
 A simple statistics library written in Rust. It draws inspiration from the
 python stdlib statistics module.
 
-The crate is called `simple_stats` and you can depend on it via cargo:
+[Documentation](https://jeffbelgum.github.io/simple_stats/simple_stats/)
+
+Usage
+-----
+
+Add this to your `Cargo.toml`:
 
 ```ini
 [dependencies]
-simple_stats = "0.0.1"
+simple_stats = "0.0.2"
+```
+
+and this to your crate root:
+
+```rust
+extern crate simple_stats;
 ```
