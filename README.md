@@ -1,10 +1,9 @@
-Simple Stats
+Simple Stats [![Build Status](https://travis-ci.org/JeffBelgum/simple_stats.svg?branch=master)](https://travis-ci.org/JeffBelgum/simple_stats) [![](http://meritbadge.herokuapp.com/simple_stats)](https://crates.io/crates/simple_stats)
 ------------
 
 A simple statistics library written in Rust. It draws inspiration from the
 python stdlib statistics module.
 
-[![Build Status](https://travis-ci.org/JeffBelgum/simple_stats.svg?branch=master)](https://travis-ci.org/JeffBelgum/simple_stats)
 
 [Documentation](https://jeffbelgum.github.io/simple_stats/simple_stats/)
 
