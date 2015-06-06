@@ -21,3 +21,8 @@ and this to your crate root:
 ```rust
 extern crate simple_stats;
 ```
+
+Contributions
+-------------
+
+Pull Requests and Issues welcome!
