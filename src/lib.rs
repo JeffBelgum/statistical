@@ -105,6 +105,17 @@ pub fn population_standard_deviation<T>(v: &[T], mu: Option<T>) -> T
     pvar.sqrt()
 }
 
+
+/// Standard score is a given datum's (signed) number of standard deviations above the mean.
+/// (reference)[http://en.wikipedia.org/wiki/Standard_score]
+/// Method returns a vector of scores for a vector of inputs. scores[n] is the score of v[n]
+pub fn standard_scores<T>(v: &[T]) -> Vec<T> where T: Float + FromPrimitive {
+    let mean = mean(&v);
+    let standard_deviation = standard_deviation(&v, None);
+    let scores: Vec<T> = v.iter().map(|val| (*val - mean)/standard_deviation).collect();
+    return scores;
+}
+
 #[inline(always)]
 fn select_pivot<T>(v: &mut [T]) where T: Copy {
     let idx = rand::random::<usize>() % v.len();
@@ -253,5 +264,12 @@ mod tests {
         let expected = 1.118034;
         let epsilon = 1e-6;
         assert!((expected - population_standard_deviation(&v, None)).abs() < epsilon);
+    }
+
+    #[test]
+    fn test_standard_scores() {
+        let v = vec![0.0, 0.25, 0.25, 1.25, 1.5, 1.75, 2.75, 3.25];
+        let expected = vec![-1.150407536484354, -0.941242529850835, -0.941242529850835, -0.10458250331675945, 0.10458250331675945, 0.31374750995027834, 1.150407536484354, 1.5687375497513918];
+        assert!(expected == standard_scores(&v));
     }
 }
