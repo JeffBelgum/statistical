@@ -14,7 +14,7 @@ Add this to your `Cargo.toml`:
 
 ```ini
 [dependencies]
-simple_stats = "0.0.3"
+simple_stats = "0.0.4"
 ```
 
 and this to your crate root:
