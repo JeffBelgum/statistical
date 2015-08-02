@@ -1,7 +1,7 @@
 [package]
 name = "simple_stats"
 description = "A simple statistics library"
-version = "0.0.4"
+version = "0.1.0"
 authors = ["Jeff Belgum <jeffbelgum@gmail.com>"]
 
 repository = "https://github.com/JeffBelgum/simple_stats"
@@ -9,6 +9,8 @@ documentation = "https://jeffbelgum.github.io/simple_stats/simple_stats/"
 homepage = "https://github.com/JeffBelgum/simple_stats"
 
 license = "MIT"
+readme = "README.md"
+keywords = ["statistics", "statistical", "analysis", "math", "algorithm", "stats"]
 
 [dependencies]
 rand = "0.3.7"
