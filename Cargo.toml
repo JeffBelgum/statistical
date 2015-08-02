@@ -10,7 +10,7 @@ homepage = "https://github.com/JeffBelgum/simple_stats"
 
 license = "MIT"
 readme = "README.md"
-keywords = ["statistics", "statistical", "analysis", "math", "algorithm", "stats"]
+keywords = ["statistics", "statistical", "analysis", "math", "algorithm"]
 
 [dependencies]
 rand = "0.3.7"
