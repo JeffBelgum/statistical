@@ -129,7 +129,7 @@ pub fn population_standard_deviation<T>(v: &[T], mu: Option<T>) -> T
 /// (reference)[http://en.wikipedia.org/wiki/Standard_score]
 /// Method returns a vector of scores for a vector of inputs. scores[n] is the score of v[n]
 pub fn standard_scores<T>(v: &[T]) -> Vec<T>
-    where T: Float 
+    where T: Float
 {
     let mean = mean(&v);
     let standard_deviation = standard_deviation(&v, None);
@@ -188,21 +188,35 @@ mod tests {
 
     use super::*;
     use num::Float;
+    use num::abs;
+
+    const EPSILON: f32 = 0.00001;
 
     #[test]
     fn test_mean() {
         let vec = vec![0.0, 0.25, 0.25, 1.25, 1.5, 1.75, 2.75, 3.25];
-        assert_eq!(mean(&vec), 1.375);
+
+        let diff = abs(mean(&vec) - 1.375);
+
+        assert!(diff <= EPSILON);
     }
 
     #[test]
     fn test_median() {
         let vec = vec![1.0, 3.0];
-        assert_eq!(median(&vec), 2.0);
+        let diff = abs(median(&vec) - 2.0);
+
+        assert!(diff <= EPSILON);
+
         let vec = vec![1.0, 3.0, 5.0];
-        assert_eq!(median(&vec), 3.0);
+        let diff = abs(median(&vec) - 3.0);
+
+        assert!(diff <= EPSILON);
+
         let vec = vec![1.0, 3.0, 5.0, 7.0];
-        assert_eq!(median(&vec), 4.0);
+        let diff = abs(median(&vec) - 4.0);
+
+        assert!(diff <= EPSILON);
     }
 
     #[test]
