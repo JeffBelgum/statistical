@@ -1,4 +1,4 @@
-Statistical [![Build Status](https://travis-ci.org/JeffBelgum/statistical.svg?branch=master)](https://travis-ci.org/JeffBelgum/statistical) [![](http://meritbadge.herokuapp.com/simple_stats)](https://crates.io/crates/statistical)
+Statistical [![Build Status](https://travis-ci.org/JeffBelgum/statistical.svg?branch=master)](https://travis-ci.org/JeffBelgum/statistical) [![](http://meritbadge.herokuapp.com/statistical)](https://crates.io/crates/statistical)
 ------------
 
 A simple statistics library written in Rust. It draws inspiration from the
