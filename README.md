@@ -1,29 +1,17 @@
-Simple Stats [![Build Status](https://travis-ci.org/JeffBelgum/simple_stats.svg?branch=master)](https://travis-ci.org/JeffBelgum/simple_stats) [![](http://meritbadge.herokuapp.com/simple_stats)](https://crates.io/crates/simple_stats)
-------------
+# Deprecated #
 
-A simple statistics library written in Rust. It draws inspiration from the
-python stdlib statistics module.
+## Simple Stats ##
 
+The simple_stats project has been renamed statistical.
 
-[Documentation](https://jeffbelgum.github.io/simple_stats/simple_stats/)
+Please update all code and linkes to use [statistical](https://www.github.com/jeffbelgum/statistical)
 
-Usage
------
-
-Add this to your `Cargo.toml`:
-
-```ini
+```
 [dependencies]
-simple_stats = "0.1.0"
-```
+statistical = "*"
+````
 
-and this to your crate root:
+## Contributions ##
 
-```rust
-extern crate simple_stats;
-```
 
-Contributions
--------------
-
-Pull Requests and Issues welcome!
+Pull Requests and Issues welcome on the renamed project [statistical](https://www.github.com/jeffbelgum/statistical)

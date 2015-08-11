@@ -1,16 +1,16 @@
 [package]
 name = "simple_stats"
-description = "A simple statistics library"
+description = "Deprecated in favor of the statistical crate!"
 version = "0.1.0"
 authors = ["Jeff Belgum <jeffbelgum@gmail.com>"]
 
-repository = "https://github.com/JeffBelgum/simple_stats"
-documentation = "https://jeffbelgum.github.io/simple_stats/simple_stats/"
-homepage = "https://github.com/JeffBelgum/simple_stats"
+repository = "https://github.com/JeffBelgum/statistical"
+documentation = "https://jeffbelgum.github.io/statistical/statistical/"
+homepage = "https://github.com/JeffBelgum/statistical"
 
 license = "MIT"
 readme = "README.md"
-keywords = ["statistics", "statistical", "analysis", "math", "algorithm"]
+keywords = ["statistics", "statistical", "deprecated", "math", "algorithm"]
 
 [dependencies]
 rand = "0.3.7"
