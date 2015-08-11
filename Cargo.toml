@@ -1,7 +1,7 @@
 [package]
 name = "simple_stats"
 description = "Deprecated in favor of the statistical crate!"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Jeff Belgum <jeffbelgum@gmail.com>"]
 
 repository = "https://github.com/JeffBelgum/statistical"
