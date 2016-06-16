@@ -52,29 +52,20 @@ pub fn quadratic_mean<T>(v: &[T]) -> T
     (sum_of_squared / num::cast(v.len()).unwrap()).sqrt()
 }
 
-pub fn mode<T>(v: &[T]) -> Option<T>
-    where T: Hash + Copy + Eq
+pub fn mode<C>(v: C) -> Option<C::Item>
+    where C : IntoIterator,
+    C::Item: Hash + Eq
 {
-    match v.len() {
-        0 => None,
-        1 => Some(v[0]),
-        _ => {
-            let mut counter = HashMap::new();
-            for x in v.iter() {
-                let count = counter.entry(x).or_insert(0);
-                *count += 1;
-            }
-            let mut max = -1;
-            let mut mode = None;
-
-            for (val, count) in counter.iter() {
-                if *count > max {
-                    max = *count;
-                    mode = Some(**val);
-                }
-            }
-            mode
-        }
+    let mut counter = HashMap::new();
+    let it = v.into_iter();
+    for x in it {
+        let count = counter.entry(x).or_insert(0);
+        *count += 1;
+    }
+    let result = counter.drain().max_by_key(|&(_,count)| count);
+    match result{
+        None => None,
+        Some((element, _)) => Some(element)
     }
 }
 
@@ -84,7 +75,6 @@ pub fn average_deviation<T>(v: &[T], mean: Option<T>) -> T
     let mean = mean.unwrap_or_else(|| stats::mean(v));
     let dev = v.iter().map(|&x| (x-mean).abs()).fold(T::zero(), |acc, elem| acc + elem);
     dev / num::cast(v.len()).unwrap()
-
 }
 
 pub fn pearson_skewness<T>(mean: T, mode: T, stdev: T) -> T
@@ -180,10 +170,23 @@ mod test {
     #[test]
     fn test_mode() {
         let vec = vec![2,4,3,5,4,6,1,1,6,4,0,0];
-        assert_eq!(mode(&vec), Some(4));
+        assert_eq!(mode(&vec), Some(&4));
         let vec = vec![1];
-        assert_eq!(mode(&vec), Some(1));
+        assert_eq!(mode(&vec), Some(&1));
+        let vec = vec![2,4,3,5,4,6,1,1,6,4,0,0];
+        assert_eq!(mode(vec), Some(4));
+        let vec = vec![1,1,1,4];
+        assert_eq!(mode(vec.iter().skip(3)), Some(&4));
     }
+
+    #[derive(PartialEq, Eq, Hash, Debug)]
+    enum Color {Blue, Green, Yellow}
+
+    #[test]
+    fn test_mode_of_colors(){
+        assert_eq!(Some(&Color::Green), mode(&[Color::Blue, Color::Green, Color::Yellow, Color::Green]));
+    }
+
     #[test]
     fn test_average_deviation() {
         let vec = vec![2.0, 2.25, 2.5, 2.5, 3.25];
