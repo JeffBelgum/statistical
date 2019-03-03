@@ -17,12 +17,14 @@
 
 extern crate rand;
 extern crate num;
+extern crate order_stat;
 
 use num::{Float,
           Num,
           NumCast,
           One,
           Zero};
+use order_stat::kth_by;
 
 
 pub enum Degree {
@@ -141,13 +143,13 @@ pub fn percentile<T>(v: &[T], ratio: f32) -> T
     where T: Float
 {
     assert!(ratio > 0.0 && ratio < 1.0);
+    let index = ratio * v.len() as f32;
     let mut sorted = Vec::from(v);
-    sorted.sort_by(|a, b| a.partial_cmp(b).unwrap());
-    let index = ratio * sorted.len() as f32;
+    let result = *kth_by(&mut sorted, index as usize, |x, y| x.partial_cmp(y).unwrap());
     if index.fract() == 0.0 {
-        (sorted[index as usize] + sorted[index as usize - 1]) / NumCast::from(2.0).unwrap()
+        (result + sorted[index as usize - 1]) / NumCast::from(2.0).unwrap()
     } else {
-        sorted[index as usize]
+        result
     }
 }
 
