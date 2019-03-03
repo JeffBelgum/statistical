@@ -17,7 +17,6 @@
 
 extern crate rand;
 extern crate num;
-extern crate order_stat;
 
 use num::{Float,
           Num,

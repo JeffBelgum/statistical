@@ -21,6 +21,7 @@
 
 extern crate rand;
 extern crate num;
+extern crate order_stat;
 
 mod univariate_;
 mod stats_;
