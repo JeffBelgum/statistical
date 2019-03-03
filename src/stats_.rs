@@ -23,6 +23,7 @@ use num::{Float,
           NumCast,
           One,
           Zero};
+use order_stat::kth_by;
 
 
 pub enum Degree {
@@ -135,6 +136,20 @@ pub fn standard_scores<T>(v: &[T]) -> Vec<T>
     let standard_deviation = standard_deviation(&v, None);
     let scores: Vec<T> = v.iter().map(|val| (*val - mean)/standard_deviation).collect();
     return scores;
+}
+
+pub fn percentile<T>(v: &[T], ratio: f32) -> T
+    where T: Float
+{
+    assert!(ratio > 0.0 && ratio < 1.0);
+    let index = ratio * v.len() as f32;
+    let mut sorted = Vec::from(v);
+    let result = *kth_by(&mut sorted, index as usize, |x, y| x.partial_cmp(y).unwrap());
+    if index.fract() == 0.0 {
+        (result + sorted[index as usize - 1]) / NumCast::from(2.0).unwrap()
+    } else {
+        result
+    }
 }
 
 #[inline(always)]
@@ -260,6 +275,19 @@ mod tests {
         let v = vec![0.0, 0.25, 0.25, 1.25, 1.5, 1.75, 2.75, 3.25];
         let expected = vec![-1.150407536484354, -0.941242529850835, -0.941242529850835, -0.10458250331675945, 0.10458250331675945, 0.31374750995027834, 1.150407536484354, 1.5687375497513918];
         assert!(expected == standard_scores(&v));
+    }
+
+    #[test]
+    fn test_percentile() {
+        let arr = &[5.0, 7.0, 4.0, 4.0, 6.0, 2.0, 8.0,];
+        assert_eq!(percentile(arr, 0.25), 4.0);
+        assert_eq!(percentile(arr, 0.50), 5.0);
+        assert_eq!(percentile(arr, 0.75), 7.0);
+        let arr = &[1.0, 3.0, 3.0, 4.0, 5.0, 6.0, 6.0, 7.0, 8.0, 8.0,];
+        assert_eq!(percentile(arr, 0.25), 3.0);
+        assert_eq!(percentile(arr, 0.50), 5.5);
+        assert_eq!(percentile(arr, 0.75), 7.0);
+        assert_eq!(percentile(&[1.0, 2.0, 3.0,], 2.0/3.0), 5.0/2.0);
     }
 
     #[test]

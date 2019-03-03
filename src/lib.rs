@@ -21,6 +21,7 @@
 
 extern crate rand;
 extern crate num;
+extern crate order_stat;
 
 mod univariate_;
 mod stats_;
@@ -52,5 +53,6 @@ pub use stats_::{
     population_variance,
     standard_deviation,
     population_standard_deviation,
-    standard_scores
+    standard_scores,
+    percentile,
 };
