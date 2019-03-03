@@ -137,11 +137,18 @@ pub fn standard_scores<T>(v: &[T]) -> Vec<T>
     return scores;
 }
 
-pub fn percentile<T>(v: &[T], ratio: f32) -> f32
+pub fn percentile<T>(v: &[T], ratio: f32) -> T
     where T: Float
 {
     assert!(ratio > 0.0 && ratio < 1.0);
-    0.0
+    let mut sorted = Vec::from(v);
+    sorted.sort_by(|a, b| a.partial_cmp(b).unwrap());
+    let index = ratio * sorted.len() as f32;
+    if index.fract() == 0.0 {
+        (sorted[index as usize] + sorted[index as usize - 1]) / NumCast::from(2.0).unwrap()
+    } else {
+        sorted[index as usize]
+    }
 }
 
 #[inline(always)]
@@ -275,6 +282,11 @@ mod tests {
         assert_eq!(percentile(arr, 0.25), 4.0);
         assert_eq!(percentile(arr, 0.50), 5.0);
         assert_eq!(percentile(arr, 0.75), 7.0);
+        let arr = &[1.0, 3.0, 3.0, 4.0, 5.0, 6.0, 6.0, 7.0, 8.0, 8.0,];
+        assert_eq!(percentile(arr, 0.25), 3.0);
+        assert_eq!(percentile(arr, 0.50), 5.5);
+        assert_eq!(percentile(arr, 0.75), 7.0);
+        assert_eq!(percentile(&[1.0, 2.0, 3.0,], 2.0/3.0), 5.0/2.0);
     }
 
     #[test]
