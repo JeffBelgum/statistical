@@ -52,5 +52,6 @@ pub use stats_::{
     population_variance,
     standard_deviation,
     population_standard_deviation,
-    standard_scores
+    standard_scores,
+    percentile,
 };

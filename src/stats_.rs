@@ -137,6 +137,13 @@ pub fn standard_scores<T>(v: &[T]) -> Vec<T>
     return scores;
 }
 
+pub fn percentile<T>(v: &[T], ratio: f32) -> f32
+    where T: Float
+{
+    assert!(ratio > 0.0 && ratio < 1.0);
+    0.0
+}
+
 #[inline(always)]
 fn select_pivot<T>(v: &mut [T])
     where T: Copy
@@ -260,6 +267,14 @@ mod tests {
         let v = vec![0.0, 0.25, 0.25, 1.25, 1.5, 1.75, 2.75, 3.25];
         let expected = vec![-1.150407536484354, -0.941242529850835, -0.941242529850835, -0.10458250331675945, 0.10458250331675945, 0.31374750995027834, 1.150407536484354, 1.5687375497513918];
         assert!(expected == standard_scores(&v));
+    }
+
+    #[test]
+    fn test_percentile() {
+        let arr = &[5.0, 7.0, 4.0, 4.0, 6.0, 2.0, 8.0,];
+        assert_eq!(percentile(arr, 0.25), 4.0);
+        assert_eq!(percentile(arr, 0.50), 5.0);
+        assert_eq!(percentile(arr, 0.75), 7.0);
     }
 
     #[test]
