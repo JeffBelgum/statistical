@@ -24,10 +24,10 @@
 extern crate rand;
 extern crate num;
 
-#[cfg(not(feature = "std"))]
+#[cfg(feature = "no_std")]
 extern crate core as std;
 
-#[cfg(not(feature = "std"))]
+#[cfg(feature = "no_std")]
 extern crate alloc;
 
 mod univariate_;
