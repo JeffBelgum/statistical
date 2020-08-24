@@ -19,6 +19,5 @@ num = { version = "0.3.0", default-features = false }
 hashbrown = { version = "0.8", optional = true}
 
 [features]
-default = [ "std" ]
-std = [ "rand/std", "num/std" ]
+default = [ "rand/std", "num/std" ]
 no_std = [ "hashbrown", "num/libm" ]

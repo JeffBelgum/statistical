@@ -146,7 +146,7 @@ pub fn standard_scores<T>(v: &[T]) -> Vec<T>
 fn select_pivot<T>(v: &mut [T])
     where T: Copy
 {
-    #[cfg(feature = "std")]
+    #[cfg(not(feature = "no_std"))]
     let idx = rand::random::<usize>() % v.len();
 
     #[cfg(feature = "no_std")]

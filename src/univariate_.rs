@@ -23,7 +23,7 @@ extern crate num;
 extern crate hashbrown;
 #[cfg(feature = "no_std")]
 use self::hashbrown::HashMap;
-#[cfg(feature = "std")]
+#[cfg(not(feature = "no_std"))]
 use std::collections::HashMap;
 
 use std::hash::Hash;
