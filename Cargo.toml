@@ -10,8 +10,14 @@ homepage = "https://github.com/JeffBelgum/statistical"
 
 license = "MIT"
 readme = "README.md"
-keywords = ["statistics", "statistical", "analysis", "math", "algorithm"]
+keywords = ["statistics", "statistical", "analysis", "math", "algorithm", "no_std"]
 
 [dependencies]
-rand = "0.6"
-num = "0.2"
+rand_distr = { version = "0.2.2", default-features = false }
+rand = { version = "0.7.3", default-features = false }
+num = { version = "0.3.0", default-features = false }
+hashbrown = { version = "0.8", optional = true}
+
+[features]
+default = [ "rand/std", "num/std" ]
+no_std = [ "hashbrown", "num/libm" ]
