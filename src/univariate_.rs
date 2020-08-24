@@ -18,13 +18,20 @@
 extern crate rand;
 extern crate num;
 
+
+#[cfg(feature = "no_std")]
+extern crate hashbrown;
+#[cfg(feature = "no_std")]
+use self::hashbrown::HashMap;
+#[cfg(feature = "std")]
 use std::collections::HashMap;
+
 use std::hash::Hash;
 
 use num::{Float,
-          One,
+          
           PrimInt,
-          Zero};
+          };
 
 use super::stats_ as stats;
 

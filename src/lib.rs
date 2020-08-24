@@ -19,8 +19,16 @@
 //!
 //! Heavily inspired by the python standard library statistics module.
 
+#![cfg_attr(feature = "no_std", no_std)]
+
 extern crate rand;
 extern crate num;
+
+#[cfg(not(feature = "std"))]
+extern crate core as std;
+
+#[cfg(not(feature = "std"))]
+extern crate alloc;
 
 mod univariate_;
 mod stats_;

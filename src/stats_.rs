@@ -18,11 +18,16 @@
 extern crate rand;
 extern crate num;
 
+
+#[cfg(feature = "no_std")]
+use alloc::vec::Vec;
+
+#[cfg(feature = "no_std")]
+use rand::Rng;
+
 use num::{Float,
           Num,
-          NumCast,
-          One,
-          Zero};
+          NumCast};
 
 
 pub enum Degree {
@@ -141,7 +146,12 @@ pub fn standard_scores<T>(v: &[T]) -> Vec<T>
 fn select_pivot<T>(v: &mut [T])
     where T: Copy
 {
+    #[cfg(feature = "std")]
     let idx = rand::random::<usize>() % v.len();
+
+    #[cfg(feature = "no_std")]
+    let idx = rand::thread_rng().gen_range(0, v.len());
+
     let tmp = v[0];
     v[0] = v[idx];
     v[idx] = tmp;
